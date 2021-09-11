@@ -1,7 +1,7 @@
 #![warn(clippy::all)]
 #![warn(clippy::pedantic)]
 
-mod utils;
+mod lib;
 
 use clap::{App, Arg, SubCommand};
 
