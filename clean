@@ -1,0 +1,13 @@
+#!/bin/sh
+
+rm -f project-euler
+
+cd runner
+cargo clean
+
+cd ../solvers
+for solver in $(exa -D); do
+  cd $solver
+  cargo clean
+  cd ..
+done

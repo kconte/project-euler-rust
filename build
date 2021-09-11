@@ -1,0 +1,4 @@
+#!/bin/sh
+cd runner
+cargo build --release
+cp target/release/runner ../project-euler
