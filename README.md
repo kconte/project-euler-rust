@@ -5,7 +5,7 @@ My solutions to various Project Euler problems.
 
 ## Usage
 ```sh
-./build.sh
+./build
 ./project-euler [OPTIONS]
 ```
 
