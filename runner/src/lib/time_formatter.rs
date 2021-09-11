@@ -40,9 +40,8 @@ impl TimeFormatter for u64 {
 }
 
 #[cfg(test)]
-#[allow(unused_imports)]
 #[allow(clippy::non_ascii_literal)]
-mod utils_tests {
+mod time_formatter_tests {
   use super::{TimeFormatter, MICROSECOND, MILLISECOND, MINUTE, SECOND};
 
   #[test]
