@@ -14,9 +14,9 @@ fn main() {
     .author("Kevin Conte <kevin@conte.net>")
     .about("Runner and Benchmarker for Project Euler solutions")
     .arg(
-      Arg::with_name("color")
-        .long("color")
-        .help("Print using colors"),
+      Arg::with_name("no-color")
+        .long("no-color")
+        .help("Don't print using colors"),
     )
     .arg(
       Arg::with_name("root")
@@ -63,7 +63,7 @@ fn main() {
     .get_matches();
 
   let root = Path::new(matches.value_of("root").unwrap());
-  let use_color = matches.is_present("color");
+  let use_color = !matches.is_present("no-color");
 
   if let Some(matches) = matches.subcommand_matches("run") {
     let mut indexes = matches.values_of("numbers").unwrap_or_default().peekable();
@@ -74,6 +74,12 @@ fn main() {
       // TODO: iterate all implemented solvers and run each of them
       unimplemented!()
     } else if indexes.peek().is_some() {
+      println!(
+        "\n{}Project Euler{}",
+        termion::style::Bold,
+        termion::style::Reset
+      );
+      println!("-------------");
       for index in indexes {
         let name = format!("{:03}", index.parse::<u64>().unwrap());
         print!("Running {} . . .", name);
