@@ -28,7 +28,7 @@ fn main() {
         let name = format!("{:03}", index.parse::<u64>().unwrap());
         let path = root.join(name);
         let res = run_one(path);
-        print_record(index.parse::<u64>().unwrap(), res, use_color);
+        print_record(index.parse::<u64>().unwrap(), &res, use_color);
       }
       print_footer();
     } else {
@@ -121,6 +121,7 @@ pub fn print_type<T>(_: &T) {
 }
 
 fn print_header() {
+  println!("\u{001b}c");
   println!("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
   println!(
     "{}┃              Project Euler              ┃{}",
@@ -140,7 +141,7 @@ fn print_footer() {
   println!("└─────┴─────────────────┴─────────────────┘");
 }
 
-fn print_record(idx: u64, res: SolverResult, use_color: bool) {
+fn print_record(idx: u64, res: &SolverResult, use_color: bool) {
   let idx_str = idx
     .to_string()
     .pad_to_width_with_alignment(3, Alignment::Right);
