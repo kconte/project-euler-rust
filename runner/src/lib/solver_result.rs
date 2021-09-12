@@ -11,7 +11,7 @@ pub struct SolverResult {
 
 impl fmt::Display for SolverResult {
   fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-    write!(f, "{} {}", self.result, self.time_taken.format_as_time())
+    write!(f, "{}    {}", self.result, self.time_taken.format_as_time())
   }
 }
 

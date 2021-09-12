@@ -81,7 +81,9 @@ fn main() {
         let res = run_one(path);
         if use_color {
           println!(
-            "\r{}{} {}{}{}                               ",
+            "\r{}{:-3}    {}{}    {}{}{}                               ",
+            termion::color::Fg(termion::color::Magenta),
+            index.parse::<u64>().unwrap(),
             termion::color::Fg(termion::color::Green),
             res.result,
             termion::color::Fg(termion::color::Cyan),
@@ -89,7 +91,11 @@ fn main() {
             termion::color::Fg(termion::color::Reset),
           );
         } else {
-          println!("\r{}                                 ", res);
+          println!(
+            "\r{}    {}                                 ",
+            index.parse::<u64>().unwrap(),
+            res
+          );
         }
       }
     } else {
