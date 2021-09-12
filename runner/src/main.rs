@@ -18,7 +18,7 @@ fn main() {
   if let Some(matches) = matches.subcommand_matches("run") {
     let mut indexes = matches.values_of("numbers").unwrap_or_default().peekable();
 
-    if matches.is_present("all") {
+    if matches.subcommand_matches("all").is_some() {
       print_header();
       run_all(root, use_color);
       print_footer();
@@ -60,13 +60,7 @@ fn get_matches() -> clap::ArgMatches<'static> {
         .about("Runs a particular problem")
         .version("0.1.0")
         .author("Kevin Conte<kevin@conte.net>")
-        .arg(
-          Arg::with_name("all")
-            .long("all")
-            .short("a")
-            .help("Run all problem solvers")
-            .conflicts_with("numbers"),
-        )
+        .subcommand(SubCommand::with_name("all").help("Run all problem solvers"))
         .arg(Arg::with_name("numbers").multiple(true)),
     )
     .subcommand(
@@ -74,13 +68,7 @@ fn get_matches() -> clap::ArgMatches<'static> {
         .about("Benchmarks a particular problem")
         .version("0.1.0")
         .author("Kevin Conte<kevin@conte.net>")
-        .arg(
-          Arg::with_name("all")
-            .long("all")
-            .short("a")
-            .help("Benchmark all problem solvers")
-            .conflicts_with("numbers"),
-        )
+        .subcommand(SubCommand::with_name("all").help("Benchmark all problem solvers"))
         .arg(
           Arg::with_name("iterations")
             .long("iterations")
