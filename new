@@ -1,0 +1,10 @@
+#!/bin/sh
+
+ROOT=./solvers
+
+[ -z $1 ] && echo "please provide problem number" && exit
+
+[ -d "$ROOT/$1" ] && echo "solver already exists, opening" && code $ROOT/$1/src/main.rs && exit
+
+cp -r $ROOT/template $ROOT/$1
+code $ROOT/$1/src/main.rs
