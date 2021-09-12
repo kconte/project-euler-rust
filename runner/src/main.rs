@@ -20,7 +20,7 @@ fn main() {
 
     if matches.is_present("all") {
       print_header();
-      // TODO: iterate all implemented solvers and run each of them
+      run_all(root, use_color);
       print_footer();
     } else if indexes.peek().is_some() {
       print_header();
@@ -101,6 +101,29 @@ fn run_one<P: AsRef<Path>>(idx: P) -> SolverResult {
   cmd.current_dir(idx.as_ref());
 
   SolverResult::from(cmd.output().unwrap().stdout)
+}
+
+fn run_all<P: AsRef<Path>>(root: P, use_color: bool) {
+  let root = root.as_ref();
+  let directories = std::fs::read_dir(root).unwrap();
+  let mut solvers: Vec<String> = vec![];
+
+  for entry in directories {
+    let entry = entry.unwrap();
+    let path = entry.path();
+
+    let filename = path.file_name().unwrap().to_str().unwrap().to_string();
+    if filename != "template" {
+      solvers.push(filename);
+    }
+  }
+
+  solvers.sort();
+
+  for solver in solvers {
+    let res = run_one(root.join(Path::new(solver.as_str())));
+    print_record(solver.parse::<u64>().unwrap(), &res, use_color);
+  }
 }
 
 /// Debug utility that prints the type of a value.
