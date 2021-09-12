@@ -1,4 +1,4 @@
 #!/bin/sh
 cd runner
-cargo build --release
+cargo build --release --quiet
 cp target/release/runner ../project-euler
