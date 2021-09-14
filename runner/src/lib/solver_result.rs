@@ -1,11 +1,11 @@
 use std::fmt;
 
 use super::TimeFormatter;
-use num_bigint::BigUint;
+use num_bigint::BigInt;
 
 #[derive(Debug)]
 pub struct SolverResult {
-  pub result:     BigUint,
+  pub result:     BigInt,
   pub time_taken: u64,
 }
 
@@ -25,7 +25,7 @@ impl From<String> for SolverResult {
     assert_eq!(parts.len(), 2);
 
     let result = parts[0]
-      .parse::<BigUint>()
+      .parse::<BigInt>()
       .expect("could not parse BigUint");
     let time_taken = parts[1].parse::<u64>().expect("could not parse u64");
 
